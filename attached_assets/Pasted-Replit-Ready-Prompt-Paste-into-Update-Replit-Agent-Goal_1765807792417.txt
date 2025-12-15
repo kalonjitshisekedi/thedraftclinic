@@ -1,0 +1,129 @@
+Replit-Ready Prompt (Paste into Update / Replit Agent)
+
+Goal: Produce a Replit-optimized version of the Draft Clinic PRD implementation plan + a runnable starter repo blueprint, using the PRD I already have (Draft Clinic = Page Doctor replica + SA payments + POPIA + global reach).
+
+Critical instruction: Do not ask clarifying questions. Do not pause mid-output. Do not say “continue” or stop halfway. Produce the full answer in one uninterrupted response. If something is ambiguous, make a reasonable default and clearly label it as an assumption.
+
+Output Required (Single Continuous Response)
+
+Replit Project Architecture Decision
+
+Choose a stack that runs well on Replit (assume: Python + Node supported).
+
+Provide rationale: what runs in one Replit vs multiple repls.
+
+Must include: backend, frontend, DB, cache, queues, storage strategy for MVP on Replit.
+
+Repository Layout (Monorepo)
+
+Provide an explicit file tree:
+
+/backend (Python app)
+
+/frontend (web UI)
+
+/infra (optional)
+
+Include exact filenames and what each contains.
+
+Replit Configuration
+
+Provide:
+
+.replit content (run commands, ports, entrypoints)
+
+replit.nix content (system deps, Python/Node versions)
+
+Include how to set up Replit Secrets (env vars list).
+
+Local-to-Prod Parity Plan
+
+Explain how the Replit MVP maps to AWS production later:
+
+Replit filesystem → S3
+
+Replit DB/Postgres → RDS
+
+Replit cron/jobs → SQS/Lambda/Workers
+
+Replit hosting → CloudFront + ALB + ECS
+
+Runnable MVP Skeleton (Code-Level Plan)
+
+Provide a minimal but real implementation plan with:
+
+Auth (email/password + Google OAuth placeholders)
+
+Document upload (store locally in Replit for MVP; interface designed to swap to S3)
+
+Quote engine (word count extraction + pricing rules)
+
+Basic job workflow statuses
+
+Admin dashboard endpoints (minimal)
+
+Provide API endpoints + sample request/response JSON.
+
+Database Schema + Migrations
+
+Provide schema for: users, profiles, jobs, job_files, quotes, orders, payments, notifications, assignments, disputes, invoices.
+
+Provide indexing plan.
+
+Provide migration approach (Django migrations or Alembic, depending on chosen framework).
+
+Background Jobs on Replit
+
+Provide how to run:
+
+virus scan stub
+
+word count extraction
+
+email sender stub
+
+Must run in Replit constraints (single repl).
+
+Provide a pragmatic MVP approach.
+
+Payments Strategy for Replit MVP
+
+Implement payment flow as:
+
+gateway “mock adapter” + webhook simulator for MVP
+
+interface pattern to swap in PayFast/Yoco/Ozow/Stripe/PayPal later
+
+Include webhook security guidelines.
+
+Security/Compliance in MVP
+
+POPIA/GDPR requirements: what you can realistically do in Replit MVP vs what must wait for AWS.
+
+Must include: encryption approach, access control, signed URL approach (or equivalent), retention policy job.
+
+Step-by-Step Setup Instructions
+
+Exact steps:
+
+install deps
+
+run backend
+
+run frontend
+
+seed admin user
+
+run tests
+
+Include expected ports + Replit “Open in new tab” notes.
+
+Constraints
+
+Must preserve the Page Doctor-like flow: select service + turnaround → upload → instant quote → checkout/pay → assign reviewer → deliver reviewed doc.
+
+Must keep SA-specific needs in mind: VAT invoice generation capability, multi-currency structure, POPIA posture.
+
+Do not stop mid-way. No partial output.
+
+MAke it AWS friendly I want to run and include documentation for AWS implementation 
