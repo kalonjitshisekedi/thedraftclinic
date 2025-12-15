@@ -1,20 +1,20 @@
 import { Link } from "wouter";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, FileText, Edit3, Layout } from "lucide-react";
+import { Check, FileText, Edit3, Layout, Calendar } from "lucide-react";
 
 const serviceIcons = {
   proofreading: FileText,
   editing: Edit3,
   formatting: Layout,
+  consultation: Calendar,
 };
 
 interface ServiceCardProps {
-  type: "proofreading" | "editing" | "formatting";
+  type: "proofreading" | "editing" | "formatting" | "consultation";
   name: string;
   description: string;
   features: string[];
-  priceRange: string;
   isSelected?: boolean;
   onSelect?: () => void;
 }
@@ -24,7 +24,6 @@ export function ServiceCard({
   name,
   description,
   features,
-  priceRange,
   isSelected,
   onSelect,
 }: ServiceCardProps) {
@@ -64,8 +63,7 @@ export function ServiceCard({
           ))}
         </ul>
       </CardContent>
-      <CardFooter className="flex items-center justify-between gap-4 pt-4 border-t border-border">
-        <span className="text-sm font-medium text-muted-foreground">{priceRange}</span>
+      <CardFooter className="flex items-center justify-end gap-4 pt-4 border-t border-border">
         {onSelect ? (
           <Button
             variant={isSelected ? "default" : "outline"}

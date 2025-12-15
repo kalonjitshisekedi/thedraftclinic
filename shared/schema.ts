@@ -337,19 +337,21 @@ export const SERVICE_TYPES = {
     name: 'Proofreading',
     description: 'Spelling, grammar, and punctuation corrections',
     features: ['Grammar & spelling fixes', 'Punctuation corrections', 'Typo elimination'],
-    priceRange: 'From R0.08/word',
   },
   editing: {
     name: 'Editing',
     description: 'Comprehensive content improvement and restructuring',
     features: ['All proofreading services', 'Sentence restructuring', 'Clarity improvements', 'Flow optimization'],
-    priceRange: 'From R0.15/word',
   },
   formatting: {
     name: 'Formatting',
     description: 'Document formatting and style consistency',
     features: ['Style guide compliance', 'Citation formatting', 'Layout optimization', 'Table of contents'],
-    priceRange: 'From R0.10/word',
+  },
+  consultation: {
+    name: 'Book 1h Consultation',
+    description: 'One-on-one expert consultation session',
+    features: ['Personalized feedback', 'Strategy discussion', 'Document review walkthrough', 'Q&A session'],
   },
 } as const;
 
