@@ -20,8 +20,6 @@ import {
   Star,
   ArrowRight,
 } from "lucide-react";
-import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
 
 const STEPS = [
   {
@@ -64,20 +62,7 @@ const TRUST_POINTS = [
   },
 ];
 
-const REVIEWERS = [
-  { name: "Sarah Johnson", role: "Academic Editor", experience: "8 years", rating: 4.9 },
-  { name: "Michael Chen", role: "Technical Writer", experience: "6 years", rating: 4.8 },
-  { name: "Emma Williams", role: "Business Editor", experience: "10 years", rating: 5.0 },
-];
-
 export default function Landing() {
-  const [wordCount, setWordCount] = useState([5000]);
-
-  const calculatePrice = (words: number) => {
-    const pricePerWord = 0.08;
-    return Math.max(words * pricePerWord, 50);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -105,7 +90,7 @@ export default function Landing() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
             <Button size="lg" asChild data-testid="button-hero-cta">
               <Link href="/quote">
-                Get Your Quote
+                Get a Quote
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -187,77 +172,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Pricing Calculator */}
-      <section id="pricing" className="py-20 bg-muted/30">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Instant Quote Calculator</h2>
-            <p className="text-muted-foreground">
-              Drag the slider to see pricing for your document size.
-            </p>
-          </div>
-          
-          <Card>
-            <CardContent className="p-8">
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <label className="text-sm font-medium">Word Count</label>
-                    <span className="text-2xl font-bold text-primary" data-testid="text-word-count">
-                      {wordCount[0].toLocaleString()} words
-                    </span>
-                  </div>
-                  <Slider
-                    value={wordCount}
-                    onValueChange={setWordCount}
-                    min={500}
-                    max={50000}
-                    step={500}
-                    className="w-full"
-                    data-testid="slider-word-count"
-                  />
-                  <div className="flex justify-between text-xs text-muted-foreground mt-2">
-                    <span>500</span>
-                    <span>50,000</span>
-                  </div>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {(Object.entries(SERVICE_TYPES) as [keyof typeof SERVICE_TYPES, typeof SERVICE_TYPES[keyof typeof SERVICE_TYPES]][]).map(
-                    ([key, service]) => {
-                      const prices = { proofreading: 0.08, editing: 0.15, formatting: 0.10 };
-                      const price = calculatePrice(wordCount[0] * (prices[key] / 0.08));
-                      return (
-                        <Card key={key} className="text-center">
-                          <CardContent className="p-4">
-                            <h4 className="font-medium mb-2">{service.name}</h4>
-                            <p className="text-2xl font-bold text-primary">
-                              R{price.toFixed(2)}
-                            </p>
-                            <p className="text-xs text-muted-foreground">Standard (1 week)</p>
-                          </CardContent>
-                        </Card>
-                      );
-                    }
-                  )}
-                </div>
-                
-                <div className="text-center">
-                  <Button size="lg" asChild>
-                    <Link href="/quote" data-testid="button-get-detailed-quote">
-                      Get Detailed Quote
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       {/* Trust Section */}
-      <section className="py-20">
+      <section className="py-20 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -309,7 +225,7 @@ export default function Landing() {
       </section>
 
       {/* Security Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Security & Compliance</h2>
@@ -352,39 +268,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Reviewers Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our expert reviewers bring years of professional editing experience.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {REVIEWERS.map((reviewer, index) => (
-              <Card key={index} data-testid={`reviewer-card-${index}`}>
-                <CardContent className="p-6 text-center">
-                  <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Users className="h-10 w-10 text-primary" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-1">{reviewer.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{reviewer.role}</p>
-                  <div className="flex items-center justify-center gap-4 text-sm">
-                    <span className="text-muted-foreground">{reviewer.experience}</span>
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                      <span>{reviewer.rating}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Final CTA */}
       <section className="py-20 bg-primary/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -392,11 +275,11 @@ export default function Landing() {
             Ready to Polish Your Document?
           </h2>
           <p className="text-lg text-muted-foreground mb-8">
-            Get started with a free quote in under 60 seconds. No commitment required.
+            Get a quote in under 60 seconds. No commitment required.
           </p>
           <Button size="lg" asChild data-testid="button-final-cta">
             <Link href="/quote">
-              Get Your Free Quote
+              Get a Quote
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>

@@ -105,18 +105,25 @@ export function Header() {
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <a href="/api/logout" data-testid="link-logout">Log Out</a>
+                  <DropdownMenuItem
+                    onClick={async () => {
+                      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+                      window.location.href = "/";
+                    }}
+                    data-testid="link-logout"
+                    className="cursor-pointer"
+                  >
+                    Log Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <div className="hidden md:flex items-center gap-2">
                 <Button variant="ghost" asChild data-testid="button-login">
-                  <a href="/api/login">Log In</a>
+                  <Link href="/login">Log In</Link>
                 </Button>
-                <Button asChild data-testid="button-get-started">
-                  <a href="/api/login">Get Started</a>
+                <Button asChild data-testid="button-get-quote">
+                  <Link href="/quote">Get a Quote</Link>
                 </Button>
               </div>
             )}
@@ -160,10 +167,10 @@ export function Header() {
               {!isAuthenticated && (
                 <div className="pt-2 border-t border-border mt-2 flex flex-col gap-2">
                   <Button variant="outline" asChild className="w-full">
-                    <a href="/api/login">Log In</a>
+                    <Link href="/login">Log In</Link>
                   </Button>
                   <Button asChild className="w-full">
-                    <a href="/api/login">Get Started</a>
+                    <Link href="/quote">Get a Quote</Link>
                   </Button>
                 </div>
               )}

@@ -10,11 +10,13 @@ import Quote from "@/pages/Quote";
 import Dashboard from "@/pages/Dashboard";
 import Admin from "@/pages/Admin";
 import Home from "@/pages/Home";
+import Login from "@/pages/Login";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
+      <Route path="/login" component={Login} />
       <Route path="/quote" component={Quote} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/admin" component={Admin} />
