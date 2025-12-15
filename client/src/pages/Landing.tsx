@@ -116,8 +116,36 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Quick Upload Section */}
+      <section className="py-16 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="border-2 border-dashed border-primary/30 hover:border-primary/50 transition-colors">
+            <CardContent className="p-8 text-center">
+              <Link href="/quote">
+                <div className="cursor-pointer">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <Upload className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">Quick Upload</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Drag and drop your document here or click to browse
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Supported formats: PDF, DOC, DOCX, TXT, RTF
+                  </p>
+                  <Button className="mt-4" size="lg">
+                    Upload Document
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </div>
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Services Section */}
-      <section id="services" className="py-20 bg-muted/30">
+      <section id="services" className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Services</h2>
@@ -126,16 +154,15 @@ export default function Landing() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {(Object.entries(SERVICE_TYPES) as [keyof typeof SERVICE_TYPES, typeof SERVICE_TYPES[keyof typeof SERVICE_TYPES]][]).map(
               ([key, service]) => (
                 <ServiceCard
                   key={key}
-                  type={key}
+                  type={key as "proofreading" | "editing" | "formatting" | "consultation"}
                   name={service.name}
                   description={service.description}
                   features={service.features}
-                  priceRange={service.priceRange}
                 />
               )
             )}
